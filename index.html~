@@ -12,19 +12,7 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
-      body {
-      padding-top: 60px;
-      padding-bottom: 40px;
-      }   
-      .hero-unit {padding:30px 20px !important;}
 
-      .txt-center { 
-      width:100%;
-      text-align:center !important; 
-      display:inline-block;
-      vertical-align:middle;
-      }
-      .txt-right { text-align:right !important; }
     </style>
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -49,7 +37,7 @@
           <a class="brand" href="#">sx86 Emulator</a>
           <div class="nav-collapse collapse">
             <ul class="nav pull-right" id="navbar">
-              <li><a href="">Github</a></li>
+              <li><a href="https://github.com/cwoodall/sx86-emulator">Github</a></li>
               <li><a href="http://www.happyrobotlabs.com">Chris Woodall's Project Blog</a></li> 
             </ul>
           </div><!--/.nav-collapse -->
@@ -85,29 +73,26 @@
           <h2> Registers</h2>
           <div id="sx86_reg"></div>
           <hr/>
+
           <h2>Actions</h2>
-
-          <button onclick="run_proc()">Run</button>
-                    <button onclick="stop_proc()">Stop</button>
-
-          <button onclick="next_step()">Next</button>
-
-          <button onclick="load_proc()">Reload</button>
-
-          <button onclick="clear_proc()">Clear</button>
-
+          
+          <div class="btn-group text-center">
+            <button class="btn" onclick="run_proc()">Run</button>
+            <button class="btn" onclick="stop_proc()">Stop</button>
+            <button class="btn" onclick="next_step()">Next</button>
+            <button class="btn" onclick="load_proc()">Reload</button>
+            <button class="btn" onclick="clear_proc()">Clear</button>
+          </div>
           <hr />
 
-          <h2>Clicked Value</h2>
-          <div id="ram_clicked_cellDisp"></div>
-          <hr />
-          <h2>Hovering Value</h2>
+          <h2>Memory Values</h2>
+          <p><span class="bold">Clicked Value -</span> <span id="ram_clicked_cellDisp"></span></p>
+          <p><span class="bold">Hovering Value -</span> <span id="ram_mouseover_cellDisp"></span>
 
-          <div id="ram_mouseover_cellDisp"></div>
           <hr />
           <div id="program_stuff">
             <h2>Program</h2>
-            <textarea style="width:100%; height:200px" id="program_load"></textarea>
+            <textarea style="width:100%; height:200px" id="program_load">900A904B9094B001A0011001800230229013C0C01003B003C0C01003B0030000</textarea>
             <button onclick="LoadProgram()">Load Program</button>
           </div>
         </div>
@@ -225,11 +210,7 @@ processor = {
         if (loc) {
             processor.registers[6] = loc;
         }
-//        console.log("PC: " + processor.registers[6]);
         processor.process();
-//        console.log("General Registers: " + processor.registers);
-//        console.log("RAM: " +processor.ram);
-//        console.log("CMP: " + processor.flags.cmp);
         if (processor.flags.jmp === 0) {
             processor.registers[6] += 1;
         } else {
@@ -356,37 +337,25 @@ load_proc = function() {
   cellDisplayById(dispID,1)
 }
 
-function LoadProgram(){
+LoadProgram = function(){
   program = [];
   var textarea = document.getElementById("program_load");
   program = textarea.value.match(/.{1,4}/g);
   for (var i = 0; i < program.length; i++) {
     program[i] = parseInt(program[i],16);
   }
-/*    program.push(parseInt(line, 16));
-    return line;
-  }); */
   load_proc();
 }
 
 dispID = 0;
 clear_proc();
 load_proc();
-  cellDisplayById(dispID,0);
-
+cellDisplayById(dispID,0);
+                      
 </script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
-      
       <script src="js/vendor/bootstrap.min.js"></script>
-
       <script src="js/main.js"></script>
-      
-      <script>
-        var _gaq=[['_setAccount','UA-34491353-1'],['_trackPageview']];
-        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-        s.parentNode.insertBefore(g,s)}(document,'script'));
-      </script>
   </body>
 </html>

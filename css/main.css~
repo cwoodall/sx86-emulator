@@ -5,22 +5,7 @@
    ========================================================================== */
 
 
-      body {
-      padding-top: 60px;
-      padding-bottom: 40px;
-      }   
-      .hero-unit {padding:30px 20px !important;}
 
-      .txt-center { 
-      width:100%;
-      text-align:center !important; 
-      display:inline-block;
-      vertical-align:middle;
-      }
-      .txt-right { text-align:right !important; }
-
-span.bold {
-          font-weight: bold; }
 td.ram_td {
 	border:1px solid white;
 	width:6px;
