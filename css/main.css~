@@ -1,3 +1,5 @@
+
+
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
@@ -24,18 +26,14 @@ span.bold {
 
 td.ram_td {
   border:1px solid white;
-  width:7px;
-  height:7px; }
+  width:6px;
+  height:6px; }
   td.ram_td.dark { background-color:#622; }
   td.ram_td.light { background-color:#baa; }
   td.ram_td.pc { background-color:#b22; }
 
-ul.leds {
-        list-style-type: none;
-        }
-        li.led {
-        display: inline;
-        }
+
+
 
 
 
