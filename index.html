@@ -46,33 +46,10 @@
     <div class="container">
       <div class="row-fluid">
         <div class="span8">
-          <ul class="nav nav-tabs">
-            <li class="active">
-              <a href="#mem_tab" data-toggle="tab">Memory</a>
-            </li>
-            <li>
-              <a href="#leds_tab" data-toggle="tab">LEDs</a>
-            </li>
-          </ul>
-          <div class="tab-content">
             <div class="tab-pane active" id="mem_tab">
               <h2>Memory</h2>
               <div id="sx86_ram"></div>
             </div>
-            <div class="tab-pane" id="leds_tab">
-              <h2>LED Display</h2>
-              <ul class="leds">
-                <li class="led"><button id="led0"></button></li>
-                <li class="led"><button id="led1"></button></li>
-                <li class="led"><button id="led2"></button></li>
-                <li class="led"><button id="led3"></button></li>
-                <li class="led"><button id="led4"></button></li>
-                <li class="led"><button id="led5"></button></li>
-                <li class="led"><button id="led6"></button></li>
-                <li class="led"><button id="led7"></button></li>
-              </ul>
-            </div>
-          </div>
         </div>
 
         <div class="span4">
@@ -88,13 +65,18 @@
             <hr />
           </div>
 
-          <div class="tabbable"> <!-- Only required for left/right tabs -->
+          <div class="row-fluid">
+                            <div id="program_stuff">
+                  <h2>Program</h2>
+                  <textarea style="" id="program_load">900A904B9094B001A0011001800230229013C0C01003B003C0C01003B0030000</textarea>
+                  <button class="btn btn-primary text-right" onclick="LoadProgram()">Load Program</button>
+                </div>
+                <hr/>
+          </div>
+          <div class="row-fluid tabbable"> <!-- Only required for left/right tabs -->
             <ul class="nav nav-tabs">
               <li class="active">
                 <a href="#tab1" data-toggle="tab">Monitor Registers</a>
-              </li>
-              <li>
-                <a href="#tab2" data-toggle="tab">Load New Program</a>
               </li>
               <li>
                 <a href="#tab3" data-toggle="tab">Help</a>
@@ -116,16 +98,9 @@
                 </p>
                 <hr />
               </div>
-              <div class="tab-pane" id="tab2">
-                <div id="program_stuff">
-                  <h2>Program</h2>
-                  <textarea style="" id="program_load">900A904B9094B001A0011001800230229013C0C01003B003C0C01003B0030000</textarea>
-                  <button onclick="LoadProgram()">Load Program</button>
-                </div>
-              </div>
               <div class="tab-pane" id="tab3">
                 <h2>Help</h2>
-                <p>Help will go here</p>
+                <p>Help text</p>
               </div>
             </div>
           </div>
@@ -135,24 +110,27 @@
       <hr />
       <footer style="height:auto">
         <div class="row-fluid">
-          <div class="span6"><p>&copy; Christopher Woodall 2013</p></div>
+          <div class="span6"><p>&copy; <a href="http://www.cjwoodall.com" target="_blank">Christopher Woodall</a> 2013 and released under <a href="http://opensource.org/licenses/MIT" target="_blank">The MIT License</a></p></div>
           <div class="span6 push-right"><p class="txt-right">Powered by <a href="http://twitter.github.com/bootstrap">Bootstrap</a></p></div>
         </div>
       </footer>
     </div> <!-- /container -->
     
-    <script type="text/javascript" src="js/sx86_emulator.js"></script>
-    <script type="text/javascript">
-      // Setup memory cell update text to 0 initially.
-      dispID = 0;
-      // Clear and load initial program into the sx86 processor.
-      load_proc();
-
-
-    </script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
       <script src="js/vendor/bootstrap.min.js"></script>
+
+
       <script src="js/main.js"></script>
+      <script type="text/javascript" src="js/sx86_emulator.js"></script>
+
+      <script src="js/urbino.js"></script>
+      <script type="text/javascript">
+        // Setup memory cell update text to 0 initially.
+        dispID = 0;
+        // Clear and load initial program into the sx86 processor.
+        load_proc();
+      </script>
+    
   </body>
 </html>
