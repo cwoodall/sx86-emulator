@@ -14,7 +14,7 @@ processor = {
                 parameter = instruction & 0x0FFF;            
                 if (parameter <= 6)
                 {
-                    console.log(processor.registers[parameter]);
+                  //  console.log(processor.registers[parameter]);
                     processor.registers[parameter] += 1;
                 }
                 break;
@@ -184,6 +184,8 @@ cellDisplayById = function(id, clicked) {
   }
 
 }
+
+// FIXME: takes too much time.
 update_ram_disp = function (ram_id) {
   ram_content = "<table style='border-collapse:separate; '>"
   for (var j = 0; j < 4096; j += 64) {
@@ -240,7 +242,9 @@ LoadProgram = function(){
   var textarea = document.getElementById("program_load");
   program = textarea.value.match(/.{1,4}/g);
   for (var i = 0; i < program.length; i++) {
-    program[i] = parseInt(program[i],16);
+    if ((program[i] !== '') || (program[i] !== ' ') || (program[i] !== '\n')) {
+      program[i] = parseInt(program[i],16);
+    }
   }
   load_proc();
 }
