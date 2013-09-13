@@ -6,6 +6,10 @@ $(document).ready(function() {
 	$("#run_btn").on("click", function () {
 		run_proc();
 	});
+
+	$("#run_fast_btn").on("click", function () {
+		run_fast_proc();
+	});
 	
 	$("#stop_btn").on("click", function () {
 		stop_proc();

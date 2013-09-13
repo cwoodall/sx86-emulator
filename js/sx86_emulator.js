@@ -132,6 +132,7 @@ function actOnEachLine(textarea, func) {
     }
     textarea.value = newLines.join("\r\n");
 }
+
 var my_interval;
 var run_set = 0;
 function run_proc() {
@@ -140,6 +141,17 @@ function run_proc() {
     run_set = 1;
   }
 }
+
+function run_fast_proc() {
+		while (processor.ram[processor.registers[6]] !== 0x0000) {
+				processor.next();
+		}
+    update_ram_disp(sx86_ram_id);
+    update_reg_disp(sx86_reg_id);
+    cellDisplayById(dispID,1 )
+
+}
+
 function stop_proc() {
   run_set = 0                        
   clearInterval(my_interval);
