@@ -177,6 +177,7 @@ program = [0x900A,
 sx86_reg_id = document.getElementById("sx86_reg");
 sx86_ram_id = document.getElementById("sx86_ram");
 
+
 update_reg_disp = function (reg_id) {
   reg_content = "<table><tr>";
   for (var i = 0; i < 7; i++) {
