@@ -121,8 +121,17 @@
 	exports.update_display = function() {
 		exports.update_ram_display();
 		exports.update_reg_display();
-		$("#ram_mouseover_cellDisp").html("0x" + sx86.mem.ram[sx86_display.hover_index].toString(16));
-    $("#ram_clicked_cellDisp").html("0x" + sx86.mem.ram[sx86_display.clicked_index].toString(16));
+        if (sx86.mem.ram[sx86_display.clicked_index] >= 0) {
+          $("#ram_clicked_cellDisp").html("0x" + sx86.mem.ram[sx86_display.clicked_index].toString(16));
+        } else {
+          $("#ram_clicked_cellDisp").html("0x****");
+        }
+		if (sx86.mem.ram[sx86_display.hover_index] >= 0) {
+          $("#ram_mouseover_cellDisp").html("0x" + sx86.mem.ram[sx86_display.hover_index].toString(16));
+        } else {
+          $("#ram_mouseover_cellDisp").html("0x****");
+        }
+
 	};
 
 
