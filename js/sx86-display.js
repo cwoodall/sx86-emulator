@@ -13,7 +13,8 @@
  */
 
 (function(exports) {
-
+	exports.clicked_index = 0;
+	exports.hover_index = 0;
 	exports.update_interval;
 	exports.running = 0;
 	exports.current_program;
@@ -37,7 +38,7 @@
 	    for (var i = 0; i < 64; i++) {
   	    id = i+j;
 	      if (typeof(sx86.mem.ram[id]) !== "undefined") {
-  	      ram_content += "<td id='sx86_ram_" + id + "' onclick='cellDisplayById("+ id + ",1)' onmouseover='cellDisplayById("+ id + ",0)' class='ram_td "+ ((sx86.mem.ram[id])?"dark":"light")+ " " + ((sx86.mem.regs[6] === id)?"pc":"") +"'> </td>";
+  	      ram_content += "<td id='sx86_ram_" + id + "' class='ram_td'></td>";
 		    }
 		  }
     	ram_content += "</tr>";
@@ -45,6 +46,10 @@
   	ram_content += "</table>";
 
   	ram_id.html(ram_content);
+
+    $("#ram_mouseover_cellID").html("0x" + sx86_display.hover_index.toString(16));
+    $("#ram_clicked_cellID").html("0x" + sx86_display.clicked_index.toString(16));
+
 	};
 
 	exports.update_reg_display = function(reg_id) {
@@ -57,7 +62,7 @@
 	exports.update_ram_display = function(reg_id) {
 		$('.ram_td').each(function(i, elem) { // Interate through everything with the .reg_td class
 			ram_index = parseInt(elem.id.split('_')[2]); // Get the index of the register of format sx86_reg_index
-			if (sx86.mem.ram[ram_index] > 0) {
+			if (sx86.mem.ram[ram_index] >= 0) {
 				$(elem).addClass('dark');
 				$(elem).removeClass('light');
 			} else {
@@ -116,6 +121,8 @@
 	exports.update_display = function() {
 		exports.update_ram_display();
 		exports.update_reg_display();
+		$("#ram_mouseover_cellDisp").html("0x" + sx86.mem.ram[sx86_display.hover_index].toString(16));
+    $("#ram_clicked_cellDisp").html("0x" + sx86.mem.ram[sx86_display.clicked_index].toString(16));
 	};
 
 

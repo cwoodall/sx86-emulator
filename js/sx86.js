@@ -43,7 +43,7 @@
    */
   exports.clear = function() {
     for (var i = 0; i < 7; i++) exports.mem.regs[i] = 0;
-    for (var i = 0; i < 4096; i++) exports.mem.ram[i] = 0;
+    for (var i = 0; i < 4096; i++) exports.mem.ram[i] = -1;
     exports.mem.flags.jmp = 0;
     exports.mem.flags.cmp = 0;
   };
@@ -58,7 +58,10 @@
   };
   
   /**
-   * __fetch = function () {}
+   * __fetch = function ()
+   * 
+   * Fetches instruction pointed to by the PC and returns it
+   * @returns instruction in ram at address exports.mem.regs[6]
    */
   exports.__fetch = function () {
     return exports.mem.ram[exports.mem.regs[6]];
