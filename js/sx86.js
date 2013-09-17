@@ -77,8 +77,7 @@
         if (parameter <= 6) {
           //  console.log(exports.mem.regs[parameter]);
           exports.mem.regs[parameter] += 1;
-          if (exports.mem.regs[Rn] > 0xffff) 
-            exports.mem.regs[Rn] = 0xffff;
+          exports.mem.regs[Rn] &= 0xffff;
         }
         break;
       case 0x2: // JMP target            
@@ -105,8 +104,7 @@
         Rm = (0x003F & instruction);
         if ((Rn <= 6) && (Rm <= 6)) {
           exports.mem.regs[Rn] += exports.mem.regs[Rm];
-          if (exports.mem.regs[Rn] > 0xffff) 
-            exports.mem.regs[Rn] = 0xffff;
+          exports.mem.regs[Rn] &= 0xffff;
         }
         break;
       case 0x6: // SUB Rn, Rm
@@ -114,8 +112,7 @@
         Rm = (0x003F & instruction);
         if ((Rn <= 6) && (Rm <= 6)) {
           exports.mem.regs[Rn] -= exports.mem.regs[Rm];
-          if (exports.mem.regs[Rn] < 0) 
-            exports.mem.regs[Rn] = 0;
+          exports.mem.regs[Rn] &= 0xffff;
         }
         break;
       case 0x7: // XOR Rn, Rm
