@@ -73,11 +73,12 @@
     switch (op_code) {
       case 0x0: break;// HALT
       case 0x1: // INC Rn
+        // All registers are 16 bits. 0-1 = 0xffff. 0xffff + 1 = 0
         parameter = instruction & 0x0FFF;            
         if (parameter <= 6) {
           //  console.log(exports.mem.regs[parameter]);
           exports.mem.regs[parameter] += 1;
-          exports.mem.regs[Rn] &= 0xffff;
+          exports.mem.regs[Rn] &= 0xffff; // Limit to 16 bits and "roll over"
         }
         break;
       case 0x2: // JMP target            
@@ -103,16 +104,18 @@
         Rn = (0x0FC0 & instruction) >> 6;
         Rm = (0x003F & instruction);
         if ((Rn <= 6) && (Rm <= 6)) {
+          // All registers are 16 bits. 0-1 = 0xffff. 0xffff + 1 = 0
           exports.mem.regs[Rn] += exports.mem.regs[Rm];
-          exports.mem.regs[Rn] &= 0xffff;
+          exports.mem.regs[Rn] &= 0xffff; // Limit to 16 bits and "roll over"
         }
         break;
       case 0x6: // SUB Rn, Rm
         Rn = (0x0FC0 & instruction) >> 6;
         Rm = (0x003F & instruction);
         if ((Rn <= 6) && (Rm <= 6)) {
+          // All registers are 16 bits. 0-1 = 0xffff. 0xffff + 1 = 0
           exports.mem.regs[Rn] -= exports.mem.regs[Rm];
-          exports.mem.regs[Rn] &= 0xffff;
+          exports.mem.regs[Rn] &= 0xffff; // Limit to 16 bits and "roll over"
         }
         break;
       case 0x7: // XOR Rn, Rm
