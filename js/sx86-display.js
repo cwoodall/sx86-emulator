@@ -80,8 +80,8 @@
 
 
   exports.next_step_update_display = function() {
-    if (sx86.mem.ram[sx86.mem.regs[6]] !== 0x0000) {
-    sx86.step();
+    if (sx86.mem.ram[sx86.mem.regs[6]] <= 0x0000) { // Treat negative values as halt
+      sx86.step();
       exports.update_display();
     } 
   };
