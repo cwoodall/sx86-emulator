@@ -71,7 +71,9 @@
     instruction = exports.__fetch();
     op_code = (instruction & 0xF000) >> 12;
     switch (op_code) {
-      case 0x0: break;// HALT
+      case 0x0: // HALT
+	exports.mem.flags.halt = true;
+	break;
       case 0x1: // INC Rn
         // All registers are 16 bits. 0-1 = 0. 0xffff + 1 = 0
         parameter = instruction & 0x0FFF;            
@@ -181,6 +183,9 @@
     }
 
     exports.__decode();
+    if (exports.mem.flags.halt === true) {
+	return;
+    }
 
     if (exports.mem.flags.jmp === 0) {
       exports.mem.regs[6] += 1;
